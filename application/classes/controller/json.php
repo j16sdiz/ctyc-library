@@ -3,9 +3,12 @@ defined('SYSPATH') or die('No direct script access.');
 
 class Controller_JSON extends Controller
 {
-	public static $COLUMN = array("id","code","name","author","publisher","publishDate","status");
+	public static $COLUMN = array("id","code","name","author","publisher");
+	
+	// list all books as filter
 	public function action_list()
 	{
+	
 		$this->auto_render = false;
 		header('content-type: application/json');
 
@@ -26,6 +29,7 @@ class Controller_JSON extends Controller
 			foreach (Controller_JSON::$COLUMN as $col) {
 				array_push( $row, $book->{$col} );
 			}
+			array_push( $row, "" );
 			array_push( $books, $row );
 		}
 		
@@ -34,13 +38,21 @@ class Controller_JSON extends Controller
 		 "iTotalRecords" => $count_all,
 		 "iTotalDisplayRecords" => $count_filter
 		));
-		
-		if (!Request::$is_ajax) {
-			?><div id="kohana-profiler">
-			<?php echo View::factory('profiler/stats') ?>
-			</div>
-			<?php
-		}
+	
+		$this->_profile();
+	}
+	
+	// get book copies
+	function action_getdetail() {
+		$code = $this->request->param('id');
+		$result = ORM::Factory('bookcopy')
+			->where('code', '=', $code)
+			->order_by('copy')
+			->find_all()->as_array();
+	
+		$this->request->response = json_encode( $result );
+	
+		$this->_profile();
 	}
 
 	function _filter_term($query) {
@@ -82,6 +94,15 @@ class Controller_JSON extends Controller
 			$query = $query->limit($_REQUEST['iDisplayLength']);
 		}
 		return $query;
+	}
+	
+	function _profile() {
+		if (!Request::$is_ajax) {
+			?><div id="kohana-profiler">
+			<?php echo View::factory('profiler/stats') ?>
+			</div>
+			<?php
+		}
 	}
 } // End
 ?>
