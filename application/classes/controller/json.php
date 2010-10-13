@@ -8,7 +8,6 @@ class Controller_JSON extends Controller
 	// list all books as filter
 	public function action_list()
 	{
-	
 		$this->auto_render = false;
 		header('content-type: application/json');
 
@@ -103,6 +102,12 @@ class Controller_JSON extends Controller
 			</div>
 			<?php
 		}
+	}
+
+
+	public function action_index()
+	{
+		$this->template->content = View::factory('pages/books');
 	}
 } // End
 ?>

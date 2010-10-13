@@ -1,138 +1,191 @@
-@import("http://yui.yahooapis.com/2.8.0r4/build/reset-fonts-grids/reset-fonts-grids.css");
-
-.col-id, .col-btn {
-	width: 28px;
+.center {
+	text-align: center;
 }
-	.col-code {
-		width: 65px;
-		}
-		.col-name {
-		}
-		.col-author {
-			width: 190px;
-			}
-			.col-publisher {
-				width: 190px;
-				}
-				
+
+#navlist
+{
+padding: 3px 0;
+margin-left: 0;
+border-bottom: 1px solid #778;
+font: bold 12px Verdana, sans-serif;
+}
+
+#navlist li
+{
+list-style: none;
+margin: 0;
+display: inline;
+}
+
+#navlist li a
+{
+padding: 3px 0.5em;
+margin-left: 3px;
+border: 1px solid #778;
+border-bottom: none;
+background: #DDE;
+text-decoration: none;
+}
+
+#navlist li a:link { color: #448; }
+#navlist li a:visited { color: #667; }
+
+#navlist li a:hover
+{
+color: #000;
+background: #AAE;
+border-color: #227;
+}
+
+#navlist li a#current
+{
+background: white;
+border-bottom: 1px solid white;
+}
+
+
+
+
+.col-hdr-id, .col-hdr-btn {
+width: 28px;
+}
+.col-hdr-code {
+width: 65px;
+}
+.col-hdr-name {
+}
+.col-hdr-author {
+width: 190px;
+}
+.col-hdr-publisher {
+width: 190px;
+}
+
+
+.col-code {
+	font-family: monospace;
+	text-align: center;
+}
+
 .btn-exp, .btn-edit {
 	cursor: pointer;
 }
 
-table.display tbody tr {
+#booksTable tbody tr {
 	border-top: 1px solid #CCCCB8;
 	background-color: white;
 }
- 
-table.display tbody tr.details {
+
+#booksTable tbody tr.details {
 	border: none;
 	padding: 0;
 }
 
-table.display tbody tr.details .detailsTable {
+#booksTable tbody tr.details .detailsTable {
 	cell-spacing: 0;
 	width: 100%;
 }
- 
+
 // ------------------------ data table things -----------------------
 
 .paging_two_button .ui-button {
 	float: left;
 	cursor: pointer;
-	* cursor: hand;
+			* cursor: hand;
 }
- 
+
 .paging_full_numbers .ui-button {
 	padding: 2px 6px;
 	margin: 0;
 	cursor: pointer;
-	* cursor: hand;
+			* cursor: hand;
 }
- 
+
 .ui-buttonset .ui-button {
 	margin-right: -0.1em !important;
 }
- 
+
 .paging_full_numbers {
 	min-width: 350px;
 }
- 
+
 .ui-toolbar {
 	padding: 5px;
 }
- 
+
 .dataTables_paginate {
 	width: auto;
 }
- 
+
 .dataTables_info {
 	padding-top: 3px;
 }
- 
-table.display thead th {
+
+#booksTable thead th {
 	padding: 3px 0px 3px 10px;
 	cursor: pointer;
-	* cursor: hand;
+			* cursor: hand;
 }
- 
- 
+
+
 /*
  * Sort arrow icon positioning
  */
-table.display thead th div.DataTables_sort_wrapper {
+#booksTable thead th div.DataTables_sort_wrapper {
 	position: relative;
 	padding-right: 20px;
 	padding-right: 20px;
 }
- 
-table.display thead th div.DataTables_sort_wrapper span {
+
+#booksTable thead th div.DataTables_sort_wrapper span {
 	position: absolute;
 	top: 50%;
 	margin-top: -8px;
 	right: 0;
 }
- 
+
 .dataTables_wrapper {
 	position: relative;
 	min-height: 302px;
 	_height: 302px;
 	clear: both;
 }
- 
+
 .dataTables_processing {
 	position: absolute;
-	top: 0px;
+	top: auto;
 	left: 50%;
 	width: 250px;
 	margin-left: -125px;
-	border: 1px solid #ddd;
+	border: 1px solid #888;
+	background-color: aaa;
 	text-align: center;
-	color: #999;
-	font-size: 11px;
+	color: #333333;
+	font-size: 16px;
 	padding: 2px 0;
 }
- 
+
 .dataTables_length {
 	width: 40%;
 	float: left;
 }
- 
+
 .dataTables_filter {
 	width: 50%;
 	float: right;
 	text-align: right;
 }
- 
+
 .dataTables_info {
 	width: 50%;
 	float: left;
 }
- 
+
 .dataTables_paginate {
 	float: right;
 	text-align: right;
 }
- 
+
 /* Pagination nested */
 .paginate_disabled_previous, .paginate_enabled_previous, .paginate_disabled_next, .paginate_enabled_next {
 	height: 19px;
@@ -140,29 +193,26 @@ table.display thead th div.DataTables_sort_wrapper span {
 	margin-left: 3px;
 	float: left;
 }
- 
+
 /* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
  * DataTables display
  */
-table.display {
+#booksTable {
 	margin: 0 auto;
 	width: 100%;
 	clear: both;
 	border-collapse: collapse;
 }
- 
-table.display tr.heading2 td {
+
+#booksTable tr.heading2 td {
 	border-bottom: 1px solid #aaa;
 }
- 
-table.display td {
+
+#booksTable td {
 	padding: 3px 10px;
 }
- 
-table.display td.center {
-	text-align: center;
-}
- 
+
+
 .dataTables_empty {
 	text-align: center;
 }

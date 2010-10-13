@@ -4,26 +4,44 @@ var oTable;
 function fillDetails( nTr, aData ) {
 	nTr.addClass('details');
 	var cell = $('td', nTr);
+	$("<td></td>").insertBefore(cell);
+	cell.attr('colspan', cell.attr('colspan') - 1);
+	cell.append("<div class='center ui-state-active' style='width:100%'> Loading ... </div>");
 	
 	$.ajax({
 		url: '<?php echo URL::base() ?>json/getdetail/' + aData[1],
+		dataType: 'json',
 		success: function(data) {
-			cell.append(
-				'<table class="detailsTable" style="border: 1px solid black">' +
-				'<tr>' +
-				'<td class="col-id"></td>' +
-				'<td class="col-code">A0001-1</td>' +
-				'<td class="col-name">Name</td>' +
-				'<td class="col-author">author</td>' + 
-				'<td class="col-publisher">Publisher</td>' +
-				'<td class="col-btn"></td>' +
-				'</tr></table>');
-				cell.text(data);
+			cell.empty();
+			for (row in data) {
+				var detailRow = $('<div class="ui-state-active detail-box"></div>');
+
+				var detailCode = $('<span class="detail-code"></span>');
+				detailCode.text(data[row].code + "-" + data[row].copy);
+				detailRow.append(detailCode);
+
+				var detailTitle = $('<span class="detail-title"></span>');
+				detailTitle.text(data[row].name );
+				detailRow.append(detailTitle);
+
+				var detailEdition = $('<span class="detail-edition"></span>');
+				detailEdition.text(data[row].version);
+				detailRow.append(detailEdition);
+
+				var detailAuthor = $('<span class="detail-author"></span>');
+				detailAuthor.text(data[row].author );
+				detailRow.append(detailAuthor);
+
+				var detailPublisher = $('<span class="detail-publisher"></span>');
+				detailPublisher.text(data[row].publisher);
+				detailRow.append(detailPublisher);
+
+				cell.append(detailRow);
+			}
 		},
 		error: function(req) {
-			cell.text("Error!");
-			cell.addClass('ui-state-error');
-			cell.addClass('center');
+			cell.empty();
+			cell.append("<div class='center ui-state-error' style='width:100%'> Error! </div>");
 		}
 	});
 }
@@ -52,23 +70,28 @@ $.fn.dataTableExt.oApi.fnSetFilteringDelay = function ( oSettings, iDelay ) {
 		iDelay = (typeof iDelay == 'undefined') ? 250 : iDelay;
 	
 	this.each( function ( i ) {
-		$.fn.dataTableExt.iApiIndex = i;
 		var
 			$this = this, 
 			oTimerId = null, 
 			sPreviousSearch = null,
+			sRealSearch = null;
 			anControl = $( 'input', _that.fnSettings().aanFeatures.f );
 		
-			anControl.unbind( 'keyup' ).bind( 'keyup', function() {
+			anControl.unbind( 'keyup' ).bind( 'keyup', function(evt) {
 			var $$this = $this;
 
-			if (sPreviousSearch === null || sPreviousSearch != anControl.val()) {
+			if (sPreviousSearch === null ||
+				sPreviousSearch != anControl.val() ||
+				evt.keyCode == 13 ||
+			    anControl.val() == '') {
 				window.clearTimeout(oTimerId);
 				sPreviousSearch = anControl.val();	
 				oTimerId = window.setTimeout(function() {
-					$.fn.dataTableExt.iApiIndex = i;
-					_that.fnFilter( anControl.val() );
-				}, iDelay);
+					if (sRealSearch == null || sRealSearch != anControl.val()) {
+						sRealSearch = anControl.val();
+						_that.fnFilter( sRealSearch );
+					}
+				}, (evt.keyCode == 13 || anControl.val() == '') ? 0 : iDelay);
 			}
 		});
 		
@@ -81,6 +104,7 @@ $(document).ready(function() {
 	$('#booksTable').dataTable( {
 		"aaSorting": [ [1, 'asc'] ],
 		"sDom": '<"H"lrf>t<"F"ip>',
+		"bAutoWidth" : true,
 		"fnRowCallback":
 			function( nRow, aData, iDisplayIndex, iDisplayIndexFull ) 
 			{
@@ -119,6 +143,9 @@ $(document).ready(function() {
 				"bSortable" : false,
 				"bSearchable" : false,
 				"aTargets": [ 5 ] 
+			}, {
+				"sClass" : "col-code",
+				"aTargets" : [ 1 ]
 			}
 		],
 		"bInfo": true,
@@ -129,23 +156,21 @@ $(document).ready(function() {
 		"sAjaxSource": '<?php echo URL::base() ?>json/list'
 	} );
 	oTable = $('#booksTable').dataTable();
-	oTable.fnSetFilteringDelay(500);
+	oTable.fnSetFilteringDelay(300);
 } );
 </script>
-<div id="dynamic"> 
-<table class="display" id="booksTable"> 
+<table id="booksTable"> 
 <thead> 
 <tr> 
-<th class="col-id"></th>
-<th class="col-code">Code</th> 
-<th class="col-name">Name</th> 
-<th class="col-author">author</th> 
-<th class="col-publisher">Publisher</th> 
-<th class="col-btn"></th>
+<th class="col-hdr-id"></th>
+<th class="col-hdr-code">Code</th> 
+<th class="col-hdr-name">Name</th> 
+<th class="col-hdr-author">author</th> 
+<th class="col-hdr-publisher">Publisher</th> 
+<th class="col-hdr-btn"></th>
 </tr> 
 </thead> 
 <tbody> 
 <tr></tr>
 </tbody> 
 </table> 
-</div> 

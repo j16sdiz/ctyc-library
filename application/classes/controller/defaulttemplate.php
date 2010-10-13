@@ -26,6 +26,13 @@ class Controller_DefaultTemplate extends Controller_Template
 			$this->template->footer           = '';
 			$this->template->styles           = array();
 			$this->template->scripts          = array();
+
+			$this->template->navigation	  = array(
+				"Index" => "library",
+				"JSON"  => "json",
+			);
+			$this->template->controller	  = $this->request->controller;
+			$this->template->action		  = $this->request->action;
 		}
 	}
 
@@ -38,13 +45,14 @@ class Controller_DefaultTemplate extends Controller_Template
 		{
 			// Define defaults
 			$styles                  = array(
+				'http://ajax.googleapis.com/ajax/libs/yui/2.8.1/build/reset-fonts-grids/reset-fonts-grids.css' => 'screen',
 				'http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.5/themes/smoothness/jquery-ui.css' => 'screen',
 				'static/css/override.css' => 'screen'
 					);
 			$scripts                 = array(
 					'http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js',
 					'http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.5/jquery-ui.min.js',
-					'static/datatable/media/js/jquery.dataTables.min.js',
+					'static/datatable/media/js/jquery.dataTables.min.js'
 					);
 
 			// Add defaults to template variables.

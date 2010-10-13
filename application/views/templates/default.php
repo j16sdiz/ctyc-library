@@ -9,7 +9,21 @@
 </head>
 <body>
 	<div id="doc3" class="yui-t7">
-		<div id="hd" role="banner"><h1><?php echo $title;?></h1></div>
+		<div id="hd" role="banner"><h1><?php echo $title;?></h1>
+<div id="navcontainer">
+<ul id="navlist">
+<?php foreach ($navigation as $label => $url) { ?>
+	<li><?php 
+		if ($url == $controller) {
+			echo html::anchor($url, $label, array( 'id' => 'current' ));
+		} else {
+			echo html::anchor($url, $label);
+		}
+	?></li>
+<?php } ?>
+</ul>
+</div>
+</div>
 		<div id="bd" role="main">
 			<div class="yui-g">
 				<?php echo $content ?>
