@@ -1,218 +1,51 @@
-.center {
-	text-align: center;
-}
+.center{text-align:center}
+#navlist{border-bottom:1px solid #778;font:bold 12px Verdana, sans-serif;margin-left:0;padding:3px 0}
+#navlist li{display:inline;list-style:none;margin:0}
+#navlist li a{background:#DDE;border:1px solid #778;border-bottom:none;margin-left:3px;padding:3px 0.5em;text-decoration:none}
+#navlist li a:link{color:#448}
+#navlist li a:visited{color:#667}
+#navlist li a:hover{background:#AAE;border-color:#227;color:#000}
+#navlist li a#current{background:#FFF;border-bottom:1px solid #FFF}
 
-#navlist
-{
-padding: 3px 0;
-margin-left: 0;
-border-bottom: 1px solid #778;
-font: bold 12px Verdana, sans-serif;
-}
+#addbookformwrap { width: 60em; border: 1px solid black; margin-left: auto; margin-right: auto; }
+#addbookformwrap legend { text-align: center; font-weight: bold; font-size: 150%; }
+#addbookformwrap li { padding: 0.3em; min-height: 3ex; }
+#addbookformwrap label { clear: left; width: 8em; float: left; text-align: right; margin-top: auto; margin-bottom: auto; margin-right: 0.5em; }
+#addbookformwrap label.error { clear: none; float: none; }
+#addbookformwrap input, #addbookformwrap select {margin-top: auto; margin-bottom: auto;}
 
-#navlist li
-{
-list-style: none;
-margin: 0;
-display: inline;
-}
+#booksTable .col-hdr-id,
+#booksTable .col-hdr-btn{width:28px}
+#booksTable .col-hdr-name {}
+#booksTable .col-hdr-code{width:65px}
+#booksTable .col-code{font-family:monospace;text-align:center}
+#booksTable .col-hdr-author,
+#booksTable .col-hdr-publisher{width:190px}
+#booksTable .btn-exp,
+#booksTable .btn-edit{cursor:pointer}
 
-#navlist li a
-{
-padding: 3px 0.5em;
-margin-left: 3px;
-border: 1px solid #778;
-border-bottom: none;
-background: #DDE;
-text-decoration: none;
-}
+#booksTable tbody tr {background-color:#FFF;border-top:1px solid #CCCCB8}
+#booksTable_wrapper .ui-buttonset .ui-button{cursor:hand;margin:0;padding:2px 6px}
+#booksTable_wrapper .paging_full_numbers{min-width:350px}
+#booksTable_wrapper .ui-toolbar{padding:5px}
 
-#navlist li a:link { color: #448; }
-#navlist li a:visited { color: #667; }
+#booksTable_wrapper .dataTables_paginate{float:right;text-align:right;width:auto}
+#booksTable_wrapper .dataTables_info{float:left;padding-top:3px;width:50%}
+#booksTable thead th{padding:3px 0 3px 10px}
+#booksTable thead th div.DataTables_sort_wrapper{padding-right:20px;position:relative}
+#booksTable thead th div.DataTables_sort_wrapper span{margin-top:-8px;position:absolute;right:0;top:50%}
 
-#navlist li a:hover
-{
-color: #000;
-background: #AAE;
-border-color: #227;
-}
+#booksTable_wrapper{_height:302px;clear:both;min-height:302px;position:relative}
+#booksTable_wrapper .dataTables_processing{background-color:aaa;border:1px solid #888;color:#333;font-size:16px;left:50%;margin-left:-125px;padding:2px 0;position:absolute;text-align:center;top:auto;width:250px}
+#booksTable_wrapper .dataTables_length{float:left;width:40%}
+#booksTable_wrapper .dataTables_filter{float:right;text-align:right;width:50%}
 
-#navlist li a#current
-{
-background: white;
-border-bottom: 1px solid white;
-}
+#booksTable_wrapper .paginate_disabled_previous,
+#booksTable_wrapper .paginate_enabled_previous,
+#booksTable_wrapper .paginate_disabled_next,
+#booksTable_wrapper .paginate_enabled_next{float:left;height:19px;margin-left:3px;width:19px}
+#booksTable {border-collapse:collapse;clear:both;margin:0 auto;width:100%}
+#booksTable td{padding:3px 10px}
 
-
-
-
-.col-hdr-id, .col-hdr-btn {
-width: 28px;
-}
-.col-hdr-code {
-width: 65px;
-}
-.col-hdr-name {
-}
-.col-hdr-author {
-width: 190px;
-}
-.col-hdr-publisher {
-width: 190px;
-}
-
-
-.col-code {
-	font-family: monospace;
-	text-align: center;
-}
-
-.btn-exp, .btn-edit {
-	cursor: pointer;
-}
-
-#booksTable tbody tr {
-	border-top: 1px solid #CCCCB8;
-	background-color: white;
-}
-
-#booksTable tbody tr.details {
-	border: none;
-	padding: 0;
-}
-
-#booksTable tbody tr.details .detailsTable {
-	cell-spacing: 0;
-	width: 100%;
-}
-
-// ------------------------ data table things -----------------------
-
-.paging_two_button .ui-button {
-	float: left;
-	cursor: pointer;
-			* cursor: hand;
-}
-
-.paging_full_numbers .ui-button {
-	padding: 2px 6px;
-	margin: 0;
-	cursor: pointer;
-			* cursor: hand;
-}
-
-.ui-buttonset .ui-button {
-	margin-right: -0.1em !important;
-}
-
-.paging_full_numbers {
-	min-width: 350px;
-}
-
-.ui-toolbar {
-	padding: 5px;
-}
-
-.dataTables_paginate {
-	width: auto;
-}
-
-.dataTables_info {
-	padding-top: 3px;
-}
-
-#booksTable thead th {
-	padding: 3px 0px 3px 10px;
-	cursor: pointer;
-			* cursor: hand;
-}
-
-
-/*
- * Sort arrow icon positioning
- */
-#booksTable thead th div.DataTables_sort_wrapper {
-	position: relative;
-	padding-right: 20px;
-	padding-right: 20px;
-}
-
-#booksTable thead th div.DataTables_sort_wrapper span {
-	position: absolute;
-	top: 50%;
-	margin-top: -8px;
-	right: 0;
-}
-
-.dataTables_wrapper {
-	position: relative;
-	min-height: 302px;
-	_height: 302px;
-	clear: both;
-}
-
-.dataTables_processing {
-	position: absolute;
-	top: auto;
-	left: 50%;
-	width: 250px;
-	margin-left: -125px;
-	border: 1px solid #888;
-	background-color: aaa;
-	text-align: center;
-	color: #333333;
-	font-size: 16px;
-	padding: 2px 0;
-}
-
-.dataTables_length {
-	width: 40%;
-	float: left;
-}
-
-.dataTables_filter {
-	width: 50%;
-	float: right;
-	text-align: right;
-}
-
-.dataTables_info {
-	width: 50%;
-	float: left;
-}
-
-.dataTables_paginate {
-	float: right;
-	text-align: right;
-}
-
-/* Pagination nested */
-.paginate_disabled_previous, .paginate_enabled_previous, .paginate_disabled_next, .paginate_enabled_next {
-	height: 19px;
-	width: 19px;
-	margin-left: 3px;
-	float: left;
-}
-
-/* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
- * DataTables display
- */
-#booksTable {
-	margin: 0 auto;
-	width: 100%;
-	clear: both;
-	border-collapse: collapse;
-}
-
-#booksTable tr.heading2 td {
-	border-bottom: 1px solid #aaa;
-}
-
-#booksTable td {
-	padding: 3px 10px;
-}
-
-
-.dataTables_empty {
-	text-align: center;
-}
+#booksTable tbody tr.details{border:none;padding:0}
+#booksTable tbody tr.details .detailsTable{cell-spacing:0;width:100%}

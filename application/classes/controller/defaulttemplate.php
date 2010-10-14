@@ -28,8 +28,8 @@ class Controller_DefaultTemplate extends Controller_Template
 			$this->template->scripts          = array();
 
 			$this->template->navigation	  = array(
-				"Index" => "library",
-				"JSON"  => "json",
+				"List" => "listbook",
+				"Add"  => "addbook",
 			);
 			$this->template->controller	  = $this->request->controller;
 			$this->template->action		  = $this->request->action;
@@ -50,8 +50,8 @@ class Controller_DefaultTemplate extends Controller_Template
 				'static/css/override.css' => 'screen'
 					);
 			$scripts                 = array(
-					'http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js',
-					'http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.5/jquery-ui.min.js',
+					'http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.js',
+					'http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.5/jquery-ui.js',
 					'static/datatable/media/js/jquery.dataTables.min.js'
 					);
 

@@ -96,8 +96,13 @@ Kohana::modules(array(
  */
 Route::set('default', '(<controller>(/<action>(/<id>)))')
 	->defaults(array(
-		'controller' => 'library',
+		'controller' => 'listbook',
 		'action'     => 'index',
+	));
+Route::set('json', 'json/z3950/<host>/<isbn>', array('host' => '[a-zA-Z0-9\.]*', 'isbn' => '[0-9X]+'))
+	->defaults(array(
+		'controller' => 'json',
+		'action'     => 'z3950'
 	));
 
 if ( ! defined('SUPPRESS_REQUEST'))

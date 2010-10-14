@@ -105,9 +105,21 @@ class Controller_JSON extends Controller
 	}
 
 
-	public function action_index()
-	{
-		$this->template->content = View::factory('pages/books');
+	function action_z3950() {
+		$this->auto_render = false;
+		header('content-type: application/json');
+
+		$lib = escapeshellcmd($this->request->param('host'));
+		$isbn = escapeshellcmd($this->request->param('isbn'));
+
+		$cache  = Cache::instance('sqlite');
+		$val = $cache->get($lib . '/' . $isbn);
+		if (!$val) {
+			$val = exec('/volume1/web/library/helper/marc.pl ' .$lib. ' ' . $isbn);
+			$cache->set($lib . '/' . $isbn, $val);
+		}
+
+		echo $val;
 	}
 } // End
 ?>
