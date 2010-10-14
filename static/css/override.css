@@ -1,4 +1,5 @@
 .center{text-align:center}
+body{text-align:left}
 #navlist{border-bottom:1px solid #778;font:bold 12px Verdana, sans-serif;margin-left:0;padding:3px 0}
 #navlist li{display:inline;list-style:none;margin:0}
 #navlist li a{background:#DDE;border:1px solid #778;border-bottom:none;margin-left:3px;padding:3px 0.5em;text-decoration:none}
@@ -9,10 +10,14 @@
 
 #addbookformwrap { width: 60em; border: 1px solid black; margin-left: auto; margin-right: auto; }
 #addbookformwrap legend { text-align: center; font-weight: bold; font-size: 150%; }
-#addbookformwrap li { padding: 0.3em; min-height: 3ex; }
+#addbookformwrap li { padding: 0.5em; min-height: 3ex; line-height: 2ex; }
 #addbookformwrap label { clear: left; width: 8em; float: left; text-align: right; margin-top: auto; margin-bottom: auto; margin-right: 0.5em; }
 #addbookformwrap label.error { clear: none; float: none; }
-#addbookformwrap input, #addbookformwrap select {margin-top: auto; margin-bottom: auto;}
+#addbookformwrap input, #addbookformwrap select {margin-top: auto; margin-bottom: auto; width: 12em;}
+#addbookformwrap input#author,
+#addbookformwrap input#title,
+#addbookformwrap input#publisher
+ {width: 25em;}
 
 #booksTable .col-hdr-id,
 #booksTable .col-hdr-btn{width:28px}
