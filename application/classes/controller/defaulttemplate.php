@@ -52,7 +52,7 @@ class Controller_DefaultTemplate extends Controller_Template
 			$scripts                 = array(
 					'http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.js',
 					'http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.5/jquery-ui.js',
-					'static/datatable/media/js/jquery.dataTables.min.js'
+					'static/js/jquery.dataTables.min.js'
 					);
 
 			// Add defaults to template variables.
