@@ -94,15 +94,24 @@ Kohana::modules(array(
  * Set the routes. Each route must have a minimum of a name, a URI and a set of
  * defaults for the URI.
  */
-Route::set('default', '(<controller>(/<action>(/<id>)))')
+Route::set('bookapi', 'api/book(/<cat>(<code>(-<copy>)))',
+	array('cat' => '[A-Z]+', 'code' => '\d*', 'copy' => '\d+'))
 	->defaults(array(
-		'controller' => 'listbook',
-		'action'     => 'index',
+		'controller' => 'bookapi',
+	));
+Route::set('bookapi_id', 'api/book/<id>', array('id' => '\d+'))
+	->defaults(array(
+		'controller' => 'bookapi',
 	));
 Route::set('json', 'json/z3950/<host>/<isbn>', array('host' => '[a-zA-Z0-9\.]*', 'isbn' => '[0-9X]+'))
 	->defaults(array(
 		'controller' => 'json',
 		'action'     => 'z3950'
+	));
+Route::set('default', '(<controller>(/<action>(/<id>)))')
+	->defaults(array(
+		'controller' => 'listbook',
+		'action'     => 'index',
 	));
 
 if ( ! defined('SUPPRESS_REQUEST'))

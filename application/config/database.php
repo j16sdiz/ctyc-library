@@ -6,7 +6,7 @@ return array
 	(
 		'type'       => 'mysql',
 		'connection' => array(
-			'hostname'   => 'localhost',
+			'hostname'   => '127.0.0.1',
 			'database'   => 'ctyc_library',
 			'username'   => 'ctyc_library',
 			'password'   => 'libraryCat',

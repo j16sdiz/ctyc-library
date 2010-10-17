@@ -109,7 +109,7 @@
 			function( nRow, aData, iDisplayIndex, iDisplayIndexFull ) 
 			{
 				$('.btn-exp', nRow).click(function(evt) {
-					var src = $(evt.srcElement);
+					var src = $(evt.target);
 					if (src.hasClass('ui-icon-circlesmall-plus')) {
 						src.addClass('ui-icon-circlesmall-minus');
 						src.removeClass('ui-icon-circlesmall-plus');

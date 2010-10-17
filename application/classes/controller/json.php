@@ -3,7 +3,7 @@ defined('SYSPATH') or die('No direct script access.');
 
 class Controller_JSON extends Controller
 {
-	public static $COLUMN = array("id","code","name","author","publisher");
+	public static $COLUMN = array("id","code","title","author","publisher");
 	
 	// list all books as filter
 	public function action_list()
@@ -44,7 +44,7 @@ class Controller_JSON extends Controller
 	// get book copies
 	function action_getdetail() {
 		$code = $this->request->param('id');
-		$result = ORM::Factory('bookcopy')
+		$result = ORM::Factory('book')
 			->where('code', '=', $code)
 			->order_by('copy')
 			->find_all()->as_array();
