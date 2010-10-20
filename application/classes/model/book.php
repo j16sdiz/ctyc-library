@@ -1,6 +1,7 @@
 <?php
 class Model_Book extends ORM
 {
+	protected $_ignored_columns = array('id','cat','code','copy');
 	protected $_filters = array(
 		TRUE => array('trim' => NULL),
 		'isbn' => array('ISBN::clean' => NULL)

@@ -31,6 +31,16 @@ class Controller_BookAPI extends Controller_REST {
 		}
 	}
 
+	private static function check_fields($book, $fields) {
+		if ($book->check())
+			return TRUE;
+		$err = array_intersect_key($book->validate()->errors(), $fields);
+		if (count($err) == 0)
+			return TRUE;
+
+		return $err;
+	}
+
 	public function action_update() {
 		header('Content-Type: application/json');
 		try {
@@ -38,12 +48,19 @@ class Controller_BookAPI extends Controller_REST {
 			$books->bfilter($this->request->param(), 2);
 
 			$books->values($_REQUEST);
-			$books->save_all();
-
-			$this->request->response = json_encode( array(
-				"success" => true,
-				"query" => $books->last_query()
-			) );
+			$err = self::check_fields($books, $_REQUEST);
+			if ($err === TRUE) {
+				$books->save_all();
+				$this->request->response = json_encode( array(
+							"success" => true,
+							"query" => $books->last_query()
+							) );
+			} else {
+				$this->request->response = json_encode( array(
+					"success" => false,
+					"error" => $err
+				) );
+			}
 		} catch (Exception $e) {
 			$this->request->response = json_encode( array(
 				"success" => false,
@@ -65,16 +82,23 @@ class Controller_BookAPI extends Controller_REST {
 
 			if ( $this->request->param('cat') ) {
 				$copies = isset($_REQUEST['copies'])?$_REQUEST['copies']:1;
+				$value  = array_merge($this->request->param(), $_REQUEST);
+				$book   = new Model_Book;
+				$book->values($value);
+				$book->copy = 1;
 
-				$err = self::create_books(
-					array_merge($this->request->param(), $_REQUEST),
-					$copies
-					);
-				if ($err != NULL)
+				if ($book->check()) { 
+					$books = self::create_books($book->as_array(), $copies);
 					$this->request->response = json_encode( array(
-						"success" => false,
-						"message" => $err
-					) );
+								"success" => true,
+								"books" => $books
+								) );
+				} else {
+					$this->request->response = json_encode( array(
+								"success" => false,
+								"error" => $book->validate()->errors()
+								) );
+				}
 			}
 			Database::instance()->query(NULL, "ROLLBACK", NULL);
 		} catch (Exception $e) {
@@ -105,16 +129,16 @@ class Controller_BookAPI extends Controller_REST {
 	}
 
 	private function create_books($value, $copy, $start_copy = 1) {
+		$books = array();
 		for ($c = $start_copy ; $c <= $copy ; $c++) {
 			$book = new Model_Book();
 			$book->values($value);
 			$book->__set('copy', $c);
-			if (!$book->check()) 
-				var_dump($book->validate()->errors());
 			$book->save();
+			array_push($books, $book->as_array());
 		}
 
-		return NULL;
+		return $books;
 	}
 }
 ?>
