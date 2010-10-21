@@ -95,7 +95,7 @@ Kohana::modules(array(
  * defaults for the URI.
  */
 Route::set('bookapi', 'api/book(/<cat>(<code>(-<copy>)))',
-	array('cat' => '[A-Z]+', 'code' => '\d*', 'copy' => '\d+'))
+	array('cat' => '[A-Z]+', 'code' => '\d+', 'copy' => '\d+'))
 	->defaults(array(
 		'controller' => 'bookapi',
 	));

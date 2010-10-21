@@ -76,13 +76,17 @@ class Controller_BookAPI extends Controller_REST {
 			Database::instance()->query(NULL, "SET AUTOCOMMIT=0", NULL);
 			Database::instance()->query(NULL, "BEGIN", NULL);
 
-			$cat = $this->request->param('cat');
-			$code = $this->request->param('code');
-			$copy = $this->request->param('copy');
+			$param = $this->request->param();
+			if (isset($param['cat'])) {
+				if (!isset($param['code'])) {
+					$param['code'] = self::get_unused_code($param['cat']);
+				}
+				if (!isset($param['copy']) || ($param['copy']+0>0)) {
+					$param['copy'] = 1;
+				}
 
-			if ( $this->request->param('cat') ) {
 				$copies = isset($_REQUEST['copies'])?$_REQUEST['copies']:1;
-				$value  = array_merge($this->request->param(), $_REQUEST);
+				$value  = array_merge($param, $_REQUEST);
 				unset($value['id']);
 				$book   = new Model_Book;
 				$book->values($value);
@@ -90,7 +94,7 @@ class Controller_BookAPI extends Controller_REST {
 				$value = $book->as_array();
 
 				if ($book->check()) { 
-					$books = self::create_books($value, $copies);
+					$books = self::create_books($value, $copies, $param['copy']+0);
 					$this->request->response = json_encode( array(
 								"success" => true,
 								"books" => $books
@@ -101,6 +105,8 @@ class Controller_BookAPI extends Controller_REST {
 								"error" => $book->validate()->errors()
 								) );
 				}
+			} else {
+				throw new Kohana_Exception('No cats found!');
 			}
 			Database::instance()->query(NULL, "ROLLBACK", NULL);
 		} catch (Exception $e) {
@@ -114,7 +120,7 @@ class Controller_BookAPI extends Controller_REST {
 //		echo View::factory('profiler/stats');
 	}
 
-	private function get_unused_code($cat) {
+	private static function get_unused_code($cat) {
 		$books = ORM::Factory('book');
 		$books->where('cat', '=', $cat);
 		$books->order_by('code', 'desc');
@@ -130,9 +136,9 @@ class Controller_BookAPI extends Controller_REST {
 		$books = ORM::Factory('book');
 	}
 
-	private function create_books($value, $copy, $start_copy = 1) {
+	private function create_books($value, $copy, $start_copy) {
 		$books = array();
-		for ($c = $start_copy ; $c <= $copy ; $c++) {
+		for ($c = $start_copy ; $c < $start_copy + $copy ; $c++) {
 			$book = new Model_Book();
 			$book->values($value);
 			$book->copy = $c;

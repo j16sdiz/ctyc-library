@@ -15,7 +15,7 @@ class Model_Book extends ORM
 		'title' => array('not_empty' => NULL),
 		'isbn'  => array('ISBN::verify' => NULL),
 		'status'=> array('not_empty' => NULL,
-		                 'regex'     => array('/[ABD]/'))
+		                 'regex'     => array('/^[ABD]$/'))
 	);
 
 	public function bfilter($param, $selectivity_limit = 0) {
