@@ -71,7 +71,6 @@ class Controller_BookAPI extends Controller_REST {
 
 	public function action_create() {
 		// header('Content-Type: application/json');
-
 		try {
 			Database::instance()->query(NULL, "SET AUTOCOMMIT=0", NULL);
 			Database::instance()->query(NULL, "BEGIN", NULL);
@@ -83,12 +82,14 @@ class Controller_BookAPI extends Controller_REST {
 			if ( $this->request->param('cat') ) {
 				$copies = isset($_REQUEST['copies'])?$_REQUEST['copies']:1;
 				$value  = array_merge($this->request->param(), $_REQUEST);
+				unset($value['id']);
 				$book   = new Model_Book;
 				$book->values($value);
 				$book->copy = 1;
+				$value = $book->as_array();
 
 				if ($book->check()) { 
-					$books = self::create_books($book->as_array(), $copies);
+					$books = self::create_books($value, $copies);
 					$this->request->response = json_encode( array(
 								"success" => true,
 								"books" => $books
@@ -103,6 +104,7 @@ class Controller_BookAPI extends Controller_REST {
 			Database::instance()->query(NULL, "ROLLBACK", NULL);
 		} catch (Exception $e) {
 			Database::instance()->query(NULL, "ROLLBACK", NULL);
+throw $e;
 			$this->request->response = json_encode( array(
 				"success" => false,
 				"message" => $e->__toString()
