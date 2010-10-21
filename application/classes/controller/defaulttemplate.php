@@ -33,35 +33,18 @@ class Controller_DefaultTemplate extends Controller_Template
 			);
 			$this->template->controller	  = $this->request->controller;
 			$this->template->action		  = $this->request->action;
-		}
-	}
 
-	/**
-	 * Fill in default values for our properties before rendering the output.
-	 */
-	public function after()
-	{
-		if($this->auto_render)
-		{
-			// Define defaults
-			$styles                  = array(
+			$this->template->styles = array(
 				'http://ajax.googleapis.com/ajax/libs/yui/2.8.1/build/reset-fonts-grids/reset-fonts-grids.css' => 'screen',
-				'http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.5/themes/smoothness/jquery-ui.css' => 'screen',
+				'static/extjs/latest/resources/css/ext-all.css' => 'screen',
+				'static/extjs/latest/resources/css/xtheme-gray.css' => 'screen',
 				'static/css/override.css' => 'screen'
 					);
-			$scripts                 = array(
-					'http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.js',
-					'http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.5/jquery-ui.js',
-					'static/js/jquery.dataTables.min.js'
+			$this->template->scripts                 = array(
+					'static/extjs/latest/adapter/ext/ext-base-debug.js',
+					'static/extjs/latest/ext-all-debug.js'
 					);
-
-			// Add defaults to template variables.
-			$this->template->styles  = array_reverse(array_merge($this->template->styles, array_reverse($styles)));
-			$this->template->scripts = array_reverse(array_merge($this->template->scripts, array_reverse($scripts)));
 		}
-
-		// Run anything that needs to run after this.
-		parent::after();
 	}
 }
 ?>

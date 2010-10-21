@@ -10,6 +10,23 @@ class Controller_BookAPI extends Controller_REST {
 
 			$books->blimit($_REQUEST);
 
+			if (isset($_REQUEST['sort'])) {
+				$sort = $_REQUEST['sort'];
+				$dir = isset($_REQUEST['dir'])?$_REQUEST['dir']:'ASC';
+
+				if ($sort == 'code' && $dir == 'DESC') {
+					$books->order_by('cat', 'DESC');
+					$books->order_by('code', 'DESC');
+					$books->order_by('copy', 'DESC');
+				} else {
+					if ($sort != 'code')
+						$books->order_by($sort, $dir);
+					$books->order_by('cat', 'ASC');
+					$books->order_by('code', 'ASC');
+					$books->order_by('copy', 'ASC');
+				}
+			}
+
 			$result = $books->find_all();
 			$book_data = array();
 			while ($result->valid()) {
@@ -19,7 +36,7 @@ class Controller_BookAPI extends Controller_REST {
 
 			$this->request->response = json_encode( array(
 				"success" => true,
-				"totalRows" => $count,
+				"totalBooks" => $count,
 				"books" => $book_data,
 				"query" => $books->last_query()
 			) );
