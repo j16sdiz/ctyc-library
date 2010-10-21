@@ -46,9 +46,10 @@ class Controller_BookAPI extends Controller_REST {
 		try {
 			$books = ORM::Factory('book');
 			$books->bfilter($this->request->param(), 2);
-
-			$books->values($_REQUEST);
-			$err = self::check_fields($books, $_REQUEST);
+			$value = $_REQUEST;
+			unset($value['id'], $value['cat'], $value['code'], $value['copy']); // SECURITY AUDIT
+			$books->values($value);
+			$err = self::check_fields($books, $value);
 			if ($err === TRUE) {
 				$books->save_all();
 				$this->request->response = json_encode( array(
@@ -104,7 +105,6 @@ class Controller_BookAPI extends Controller_REST {
 			Database::instance()->query(NULL, "ROLLBACK", NULL);
 		} catch (Exception $e) {
 			Database::instance()->query(NULL, "ROLLBACK", NULL);
-throw $e;
 			$this->request->response = json_encode( array(
 				"success" => false,
 				"message" => $e->__toString()
@@ -135,7 +135,7 @@ throw $e;
 		for ($c = $start_copy ; $c <= $copy ; $c++) {
 			$book = new Model_Book();
 			$book->values($value);
-			$book->__set('copy', $c);
+			$book->copy = $c;
 			$book->save();
 			array_push($books, $book->as_array());
 		}

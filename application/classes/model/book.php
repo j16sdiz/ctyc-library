@@ -1,14 +1,21 @@
 <?php
 class Model_Book extends ORM
 {
-	protected $_ignored_columns = array('id','cat','code','copy');
 	protected $_filters = array(
 		TRUE => array('trim' => NULL),
 		'isbn' => array('ISBN::clean' => NULL)
 	);
 	protected $_rules = array(
-		'cat' => array('not_empty' => NULL),
-		'isbn' => array('ISBN::verify' => NULL)
+		'cat'   => array('not_empty' => NULL,
+		                 'alpha'     => NULL),
+		'code'  => array('not_empty' => NULL,
+		                 'numeric'   => NULL),
+		'copy'  => array('not_empty' => NULL,
+		                 'numeric'   => NULL),
+		'title' => array('not_empty' => NULL),
+		'isbn'  => array('ISBN::verify' => NULL),
+		'status'=> array('not_empty' => NULL,
+		                 'regex'     => array('/[ABD]/'))
 	);
 
 	public function bfilter($param, $selectivity_limit = 0) {
