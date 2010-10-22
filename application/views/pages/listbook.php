@@ -1,7 +1,7 @@
 <div id="loading-mask"></div>
 <div id="loading">
   <div class="loading-indicator">
-    Loading...
+	Loading...
   </div>
 </div>
 
@@ -11,61 +11,71 @@
 ?>
 
 <script type="text/javascript">
-Ext.onReady(function(){
+Ext.onReady(function() {
 	// create the Data Store
 	var store = new Ext.data.JsonStore({
 		root: 'books',
-			totalProperty: 'totalBooks',
-			idProperty: 'id',
-			restful: true,
-			remoteSort: true,
+		totalProperty: 'totalBooks',
+		idProperty: 'id',
+		restful: true,
+		remoteSort: true,
 
-			fields: [
-			'id', 'cat', 'code', 'copy', 'title', 'author', 'publisher', 'edition', 'isbn', 'status',
-			{name: 'publishDate', type: 'date', dateFormat: 'Y-m-d' }
-			],
+		fields: ['id', 'cat', 'code', 'copy', 'title', 'author', 'publisher', 'edition', 'isbn', 'status', {
+			name: 'publishDate',
+			type: 'date',
+			dateFormat: 'Y-m-d'
+		}],
 
-			url: 'http://ctyc.dyndns.org/library/api/book/',
+		url: 'http://ctyc.dyndns.org/library/api/book/',
 		writer: new Ext.data.JsonWriter()
 	});
 	store.setDefaultSort('code', 'asc');
-	store.load({params:{start:0, limit:20}});
+	store.load({
+		params: {
+			start: 0,
+			limit: 20
+		}
+	});
 
 	var viewport = new Ext.Viewport({
 		layout: 'border',
-		items: [
-			{ region:'north', html: "1234" },
-			{
-				id: 'bookpanel',
-				margins:'0 5 5 5',
-				region:'center',
+		items: [{
+			region: 'north',
+			html: "1234"
+		},
+		{
+			id: 'bookpanel',
+			margins: '0 5 5 5',
+			region: 'center',
+			store: store,
+			xtype: 'x-ctyc-bookgrid',
+			tbar: ['Search:', new Ext.ux.form.SearchField({
 				store: store,
-				xtype: 'x-ctyc-bookgrid',
-				tbar: [
-					'Search:',
-					new Ext.ux.form.SearchField({
-						store: store,
-						width: 300
-					})
-				],
-				bbar: new Ext.PagingToolbar({
-					displayInfo: true,
-					displayMsg: 'Displaying topics {0} - {1} of {2}',
-					emptyMsg: "No topics to display",
-					pageSize: 20,
-					store: store
-				}),
-				buttonAlign: 'left',
-				fbar: [
-				{ text: 'fbar Left' }, '->', { text: 'fbar Right' }
-				]
-			}
-		]
+				width: 300
+			})],
+			bbar: new Ext.PagingToolbar({
+				displayInfo: true,
+				displayMsg: 'Displaying topics {0} - {1} of {2}',
+				emptyMsg: "No topics to display",
+				pageSize: 20,
+				store: store
+			}),
+			buttonAlign: 'left',
+			fbar: [{
+				text: 'fbar Left'
+			},
+			'->', {
+				text: 'fbar Right'
+			}]
+		}]
 	});
 
-	setTimeout(function(){
+	setTimeout(function() {
 		Ext.get('loading').remove();
-		Ext.get('loading-mask').fadeOut({remove:true});
-	}, 250);
+		Ext.get('loading-mask').fadeOut({
+			remove: true
+		});
+	},
+	250);
 });
 </script>
