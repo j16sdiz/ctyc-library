@@ -25,7 +25,8 @@ Ext.onReady(function(){
 			{name: 'publishDate', type: 'date', dateFormat: 'Y-m-d' }
 			],
 
-			url: 'http://ctyc.dyndns.org/library/api/book/'
+			url: 'http://ctyc.dyndns.org/library/api/book/',
+		writer: new Ext.data.JsonWriter()
 	});
 	store.setDefaultSort('code', 'asc');
 	store.load({params:{start:0, limit:20}});

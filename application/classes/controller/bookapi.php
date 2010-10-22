@@ -76,6 +76,8 @@ class Controller_BookAPI extends Controller_REST {
 			$books = ORM::Factory('book');
 			$books->bfilter($this->request->param(), 2);
 			$value = $_REQUEST;
+			if (isset($_POST['books']))
+				$value = array_merge($value, json_decode($_POST['books'],TRUE));
 			unset($value['id'], $value['cat'], $value['code'], $value['copy']); // SECURITY AUDIT
 			$books->values($value);
 			$err = self::check_fields($books, $value);
