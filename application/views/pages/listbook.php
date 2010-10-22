@@ -1,7 +1,12 @@
+<div id="loading-mask"></div>
+<div id="loading">
+  <div class="loading-indicator">
+    Loading...
+  </div>
+</div>
+
 <script type="text/javascript">
-
 Ext.ns('Ext.CTYC')
-
 Ext.CTYC.BookGrid = Ext.extend(Ext.grid.GridPanel,{
 			trackMouseOver:false,
 			loadMask: true,
@@ -60,13 +65,24 @@ Ext.onReady(function(){
 				store: store,
 				xtype: 'x-ctyc-bookgrid',
 				tbar: [
-					'->',
 					'Search:',
-					' ',
 					new Ext.form.TextField({
-						width: 200,
+						width: 300,
 						emptyText:'Search...',
-						enableKeyEvents: true
+						enableKeyEvents: true,
+						listeners: {
+							keypress: {
+								scope: this,
+								fn: function (o,e) {
+									if (e.keyCode == 13) {
+										alert(o.getValue());
+									}
+e.stopPropagation();
+return false;
+								}
+							},
+							scope: this
+						}
 					})
 				],
 				bbar: new Ext.PagingToolbar({
@@ -83,5 +99,10 @@ Ext.onReady(function(){
 			}
 		]
 	});
+
+	setTimeout(function(){
+		Ext.get('loading').remove();
+		Ext.get('loading-mask').fadeOut({remove:true});
+	}, 250);
 });
 </script>

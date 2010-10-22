@@ -4,10 +4,13 @@
 <title><?php echo $title;?></title>
 <meta http-equiv="Content-type" content="text/html; charset=UTF-8" />
 <meta http-equiv="Content-Language" content="zh-hk" />
-	<?php foreach($styles as $file => $type) { echo HTML::style($file, array('media' => $type)), "\n"; }?>
-	<?php foreach($scripts as $file) { echo HTML::script($file, NULL, TRUE), "\n"; }?>
+<!-- a -->
+<?php foreach($styles as $file => $type) { echo HTML::style($file, array('media' => $type)), "\n"; }?>
+<!-- b -->
+<?php foreach($scripts as $file) { echo HTML::script($file, NULL, TRUE), "\n"; }?>
 </head>
 <body>
-	<?php echo $content ?>
+<!-- c -->
+<?php echo $content ?>
 </body>
 </html>

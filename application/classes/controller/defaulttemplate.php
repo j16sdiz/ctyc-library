@@ -35,7 +35,6 @@ class Controller_DefaultTemplate extends Controller_Template
 			$this->template->action		  = $this->request->action;
 
 			$this->template->styles = array(
-				'http://ajax.googleapis.com/ajax/libs/yui/2.8.1/build/reset-fonts-grids/reset-fonts-grids.css' => 'screen',
 				'static/extjs/latest/resources/css/ext-all.css' => 'screen',
 				'static/extjs/latest/resources/css/xtheme-gray.css' => 'screen',
 				'static/css/override.css' => 'screen'

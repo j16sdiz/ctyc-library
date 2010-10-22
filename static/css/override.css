@@ -1,56 +1,29 @@
-.center{text-align:center}
-body{text-align:left}
-#navlist{border-bottom:1px solid #778;font:bold 12px Verdana, sans-serif;margin-left:0;padding:3px 0}
-#navlist li{display:inline;list-style:none;margin:0}
-#navlist li a{background:#DDE;border:1px solid #778;border-bottom:none;margin-left:3px;padding:3px 0.5em;text-decoration:none}
-#navlist li a:link{color:#448}
-#navlist li a:visited{color:#667}
-#navlist li a:hover{background:#AAE;border-color:#227;color:#000}
-#navlist li a#current{background:#FFF;border-bottom:1px solid #FFF}
+#loading-mask {
+  position: absolute;
+  left:     0;
+  top:      0;
+  width:    100%;
+  height:   100%;
+  z-index:  20000;
+  background-color: white;
+}
 
-#addbookformwrap { width: 60em; border: 1px solid black; margin-left: auto; margin-right: auto; }
-#addbookformwrap legend { text-align: center; font-weight: bold; font-size: 150%; }
-#addbookformwrap li { padding: 0.5em; min-height: 3ex; line-height: 2ex; }
-#addbookformwrap label { clear: left; width: 8em; float: left; text-align: right; margin-top: auto; margin-bottom: auto; margin-right: 0.5em; }
-#addbookformwrap label.error { clear: none; float: none; }
-#addbookformwrap input, #addbookformwrap select {margin-top: auto; margin-bottom: auto; width: 12em;}
-#addbookformwrap input#author,
-#addbookformwrap input#title,
-#addbookformwrap input#publisher
- {width: 25em;}
+#loading {
+  position: absolute;
+  left:     50%;
+  top:      50%;
+  padding:  2px;
+  z-index:  20001;
+  height:   auto;
+  margin:   -35px 0 0 -30px;
+}
 
-#booksTable .col-hdr-id,
-#booksTable .col-hdr-btn{width:28px}
-#booksTable .col-hdr-name {}
-#booksTable .col-hdr-code{width:65px}
-#booksTable .col-code{font-family:monospace;text-align:center}
-#booksTable .col-hdr-author,
-#booksTable .col-hdr-publisher{width:190px}
-#booksTable .btn-exp,
-#booksTable .btn-edit{cursor:pointer}
-
-#booksTable tbody tr {background-color:#FFF;border-top:1px solid #CCCCB8}
-#booksTable_wrapper .ui-buttonset .ui-button{cursor:hand;margin:0;padding:2px 6px}
-#booksTable_wrapper .paging_full_numbers{min-width:350px}
-#booksTable_wrapper .ui-toolbar{padding:5px}
-
-#booksTable_wrapper .dataTables_paginate{float:right;text-align:right;width:auto}
-#booksTable_wrapper .dataTables_info{float:left;padding-top:3px;width:50%}
-#booksTable thead th{padding:3px 0 3px 10px}
-#booksTable thead th div.DataTables_sort_wrapper{padding-right:20px;position:relative}
-#booksTable thead th div.DataTables_sort_wrapper span{margin-top:-8px;position:absolute;right:0;top:50%}
-
-#booksTable_wrapper{_height:302px;clear:both;min-height:302px;position:relative}
-#booksTable_wrapper .dataTables_processing{background-color:aaa;border:1px solid #888;color:#333;font-size:16px;left:50%;margin-left:-125px;padding:2px 0;position:absolute;text-align:center;top:auto;width:250px}
-#booksTable_wrapper .dataTables_length{float:left;width:40%}
-#booksTable_wrapper .dataTables_filter{float:right;text-align:right;width:50%}
-
-#booksTable_wrapper .paginate_disabled_previous,
-#booksTable_wrapper .paginate_enabled_previous,
-#booksTable_wrapper .paginate_disabled_next,
-#booksTable_wrapper .paginate_enabled_next{float:left;height:19px;margin-left:3px;width:19px}
-#booksTable {border-collapse:collapse;clear:both;margin:0 auto;width:100%}
-#booksTable td{padding:3px 10px}
-
-#booksTable tbody tr.details{border:none;padding:0}
-#booksTable tbody tr.details .detailsTable{cell-spacing:0;width:100%}
+#loading .loading-indicator {
+  background: url(../images/loading.gif) no-repeat;
+  color:      #555;
+  font:       bold 13px tahoma,arial,helvetica;
+  padding:    8px 42px;
+  margin:     0;
+  text-align: center;
+  height:     auto;
+}
