@@ -7,6 +7,7 @@
 
 <?php
 	echo HTML::script("static/js/bookgrid.js", NULL, TRUE);
+	echo HTML::script("static/extjs/latest/examples/ux/SearchField.js", NULL, TRUE);
 ?>
 
 <script type="text/javascript">
@@ -41,21 +42,9 @@ Ext.onReady(function(){
 				xtype: 'x-ctyc-bookgrid',
 				tbar: [
 					'Search:',
-					new Ext.form.TextField({
-						width: 300,
-						emptyText:'Search...',
-						enableKeyEvents: true,
-						listeners: {
-							keypress: {
-								scope: this,
-								fn: function (o,e) {
-									if (e.keyCode == 13) {
-										alert(o.getValue());
-									}
-								}
-							},
-							scope: this
-						}
+					new Ext.ux.form.SearchField({
+						store: store,
+						width: 300
 					})
 				],
 				bbar: new Ext.PagingToolbar({

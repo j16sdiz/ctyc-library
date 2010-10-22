@@ -5,6 +5,18 @@ class Controller_BookAPI extends Controller_REST {
 		try {
 			$books = ORM::Factory('book');
 			$books->bfilter($this->request->param());
+			if (isset($_REQUEST['query'])) {
+				$query = $_REQUEST['query'];
+				foreach( preg_split('/[\s+,\'"\.]/', $query) as $si ) {
+					$si = trim($si);
+					if ($si == '') continue;
+					$books = $books->and_where_open();
+					$books->or_where('title', 'LIKE', '%'.$si.'%');
+					$books->or_where('author', 'LIKE', '%'.$si.'%');
+					$books->or_where('publisher', 'LIKE', '%'.$si.'%');
+					$books = $books->and_where_close();
+				}
+			}
 
 			$count = $books->reset(FALSE)->count_all();
 
