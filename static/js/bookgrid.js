@@ -77,6 +77,7 @@ Ext.CTYC.BookGrid = Ext.extend(Ext.grid.GridPanel, {
 		header: 'publishDate',
 		dataIndex: 'publishDate',
 		sortable: true,
+		renderer: Ext.util.Format.dateRenderer('Y-m-d'),
 		editor: {
 			xtype: 'datefield'
 		}
