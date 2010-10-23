@@ -11,6 +11,21 @@
 ?>
 
 <script type="text/javascript">
+Ext.CTYC.CatSelect = Ext.extend(Ext.form.ComboBox, {
+	mode: 'local',
+	editable: false,
+	triggerAction: 'all',
+	store: [['','-- All --'],['A','A - OT / NT'],['B','B - OT'],['C','C - NT']],
+	value: '',
+	listeners: { 
+		select : function(cbx, rec, idx) {
+			cbx.mainStore.proxy.api['read'].url = cbx.mainStore.proxy.url + rec.data.field1;
+			cbx.mainStore.reload();
+		}
+	}
+} );
+Ext.reg('x-ctyc-catselect', Ext.CTYC.CatSelect);
+	
 Ext.onReady(function() {
 	// create the Data Store
 	var store = new Ext.data.JsonStore({
@@ -49,7 +64,12 @@ Ext.onReady(function() {
 			region: 'center',
 			store: store,
 			xtype: 'x-ctyc-bookgrid',
-			tbar: ['Search:', new Ext.ux.form.SearchField({
+			tbar: [
+			'Cat:',
+			{ xtype: 'x-ctyc-catselect', mainStore: store },
+			'-',
+			'Search:',
+			new Ext.ux.form.SearchField({
 				store: store,
 				width: 300
 			})],
