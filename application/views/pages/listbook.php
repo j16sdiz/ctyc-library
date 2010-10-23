@@ -90,6 +90,18 @@ Ext.onReady(function() {
 		}]
 	});
 
+	Ext.data.DataProxy.addListener('exception',
+		function(proxy, type, action, options, res) {
+		if (type === 'remote') {
+			Ext.Msg.show({
+				title: 'REMOTE EXCEPTION',
+					msg: res.message,
+					icon: Ext.MessageBox.ERROR,
+					buttons: Ext.Msg.OK
+			});
+		}
+	});
+
 	setTimeout(function() {
 		Ext.get('loading').remove();
 		Ext.get('loading-mask').fadeOut({
