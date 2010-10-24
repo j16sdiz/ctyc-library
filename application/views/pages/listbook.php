@@ -41,7 +41,7 @@ Ext.onReady(function() {
 			dateFormat: 'Y-m-d'
 		}],
 
-		url: 'http://ctyc.dyndns.org/library/api/book/',
+		url: '<?php echo URL::base(); ?>/api/book/',
 		writer: new Ext.data.JsonWriter()
 	});
 	store.setDefaultSort('code', 'asc');
