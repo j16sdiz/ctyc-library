@@ -1,8 +1,5 @@
-.icon-book-edit {
- width: 16px;
- height: 16px;
- background-image: url("../images/icons/book_edit.png");
-}
+.icon-save { background-image: url(../images/save.gif) !important; background-repeat: no-repeat; }
+.icon-book-edit { width: 16px; height: 16px; background-image: url("../images/silk/book_edit.png") !important; background-repeat: no-repeat; } /* from "silk" icon library. http://www.fanfanfan.com */
 
 #loading-mask {
   position: absolute;
