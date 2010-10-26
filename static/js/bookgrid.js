@@ -2,6 +2,7 @@ Ext.ns('Ext.CTYC')
 Ext.CTYC.BookGrid = Ext.extend(Ext.grid.GridPanel, {
 	trackMouseOver: false,
 	loadMask: true,
+	trackMouseOver: true,
 
 	// grid columns
 	columns: [{
