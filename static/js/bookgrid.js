@@ -86,6 +86,6 @@ Ext.CTYC.BookGrid = Ext.extend(Ext.grid.GridPanel, {
 	viewConfig: {
 		autoFill: true,
 		forceFit: true
-	},
+	}
 });
 Ext.reg('x-ctyc-bookgrid', Ext.CTYC.BookGrid);
