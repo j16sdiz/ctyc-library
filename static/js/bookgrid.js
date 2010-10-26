@@ -1,4 +1,5 @@
 Ext.ns('Ext.CTYC')
+Ext.QuickTips.init();
 Ext.CTYC.BookGrid = Ext.extend(Ext.grid.GridPanel, {
 	trackMouseOver: false,
 	loadMask: true,
@@ -8,7 +9,9 @@ Ext.CTYC.BookGrid = Ext.extend(Ext.grid.GridPanel, {
 		id: 'id',
 		header: 'id',
 		dataIndex: 'id',
-		sortable: true
+		sortable: true,
+		hidden: true,
+		hideable: false	 // hack
 	},
 	{
 		id: 'code',
@@ -81,6 +84,29 @@ Ext.CTYC.BookGrid = Ext.extend(Ext.grid.GridPanel, {
 		editor: {
 			xtype: 'datefield'
 		}
+	},
+	{
+		id: 'col-act',
+		xtype: 'actioncolumn',
+		items: [{
+			iconCls: 'icon-book-edit',
+			tooltip: 'Edit',
+			handler:  function(grid, rowIndex, colIndex) {
+				var rec = grid.getStore().getAt(rowIndex);
+				console.log(rec);
+				try {
+					handleBookEdit(grid, rowIndex, colIndex);
+				} catch (err) {
+					console.warn(err);
+				}
+			}
+		}],
+		width: 28,
+		fixed: true,
+		menuDisabled: true,
+		sortable: false,
+		//hidden: true,
+		hideable: false	 // hack
 	}],
 
 	viewConfig: {
