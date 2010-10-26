@@ -11,6 +11,8 @@
 ?>
 
 <script type="text/javascript">
+Ext.BLANK_IMAGE_URL = '<?php echo URL::base(); ?>static/extjs/latest/resources/images/default/s.gif';
+Ext.QuickTips.init();
 Ext.CTYC.CatSelect = Ext.extend(Ext.form.ComboBox, {
 	mode: 'local',
 	editable: false,

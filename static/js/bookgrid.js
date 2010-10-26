@@ -1,5 +1,4 @@
 Ext.ns('Ext.CTYC')
-Ext.QuickTips.init();
 Ext.CTYC.BookGrid = Ext.extend(Ext.grid.GridPanel, {
 	trackMouseOver: false,
 	loadMask: true,
