@@ -7,6 +7,7 @@
 
 <?php
 	echo HTML::script("static/js/bookgrid.js", NULL, TRUE);
+	echo HTML::script("static/js/bookedit.js", NULL, TRUE);
 	echo HTML::script("static/extjs/latest/examples/ux/SearchField.js", NULL, TRUE);
 ?>
 
