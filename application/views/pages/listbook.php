@@ -18,18 +18,18 @@ Ext.CTYC.CatSelect = Ext.extend(Ext.form.ComboBox, {
 	mode: 'local',
 	editable: false,
 	triggerAction: 'all',
-	store: [['','-- All --'],['A','A - OT / NT'],['B','B - OT'],['C','C - NT']],
+	store: [['', '-- All --'], ['A', 'A - OT / NT'], ['B', 'B - OT'], ['C', 'C - NT']],
 	value: '',
 	listeners: { 
-		select : function(cbx, rec, idx) {
+		select : function (cbx, rec, idx) {
 			cbx.mainStore.proxy.api['read'].url = cbx.mainStore.proxy.url + rec.data.field1;
 			cbx.mainStore.reload();
 		}
 	}
-} );
+});
 Ext.reg('x-ctyc-catselect', Ext.CTYC.CatSelect);
 	
-Ext.onReady(function() {
+Ext.onReady(function () {
 	// create the Data Store
 	var store = new Ext.data.JsonStore({
 		root: 'books',
@@ -68,14 +68,15 @@ Ext.onReady(function() {
 			store: store,
 			xtype: 'x-ctyc-bookgrid',
 			tbar: [
-			'Cat:',
-			{ xtype: 'x-ctyc-catselect', mainStore: store },
-			'-',
-			'Search:',
-			new Ext.ux.form.SearchField({
-				store: store,
-				width: 300
-			})],
+				'Cat:',
+				{ xtype: 'x-ctyc-catselect', mainStore: store },
+				'-',
+				'Search:',
+				new Ext.ux.form.SearchField({
+					store: store,
+					width: 300
+				})
+			],
 			bbar: new Ext.PagingToolbar({
 				displayInfo: true,
 				displayMsg: 'Displaying topics {0} - {1} of {2}',
@@ -87,18 +88,18 @@ Ext.onReady(function() {
 	});
 
 	Ext.data.DataProxy.addListener('exception',
-		function(proxy, type, action, options, res) {
+		function (proxy, type, action, options, res) {
 		if (type === 'remote') {
 			Ext.Msg.show({
 				title: 'REMOTE EXCEPTION',
-					msg: res.message,
-					icon: Ext.MessageBox.ERROR,
-					buttons: Ext.Msg.OK
+				msg: res.message,
+				icon: Ext.MessageBox.ERROR,
+				buttons: Ext.Msg.OK
 			});
 		}
 	});
 
-	setTimeout(function() {
+	setTimeout(function () {
 		Ext.get('loading').remove();
 		Ext.get('loading-mask').fadeOut({
 			remove: true
