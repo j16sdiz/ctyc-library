@@ -8,7 +8,6 @@ function handleBookEdit(grid, rowIndex, colIndex) {
 
 	var form = new Ext.form.FormPanel(
 	{
-		baseCls: 'x-plain',
 		labelWidth: 55,
 		defaultType: 'textfield',
 		items: [
@@ -19,7 +18,6 @@ function handleBookEdit(grid, rowIndex, colIndex) {
 	form.getForm().loadRecord(rec);
 
 	var win = new Ext.Window({
-		plain: true,
 		bodyStyle: 'padding:5px',
 		animateTarget: row,
 		modal: true,

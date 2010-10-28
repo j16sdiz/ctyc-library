@@ -36,7 +36,6 @@ class Controller_DefaultTemplate extends Controller_Template
 
 			$this->template->styles = array(
 				'static/extjs/latest/resources/css/ext-all.css' => 'screen',
-				'static/extjs/latest/resources/css/xtheme-gray.css' => 'screen',
 				'static/css/override.css' => 'screen'
 					);
 			$this->template->scripts                 = array(
