@@ -12,7 +12,7 @@ function handleBookEdit(grid, rowIndex, colIndex) {
 		labelWidth: 85,
 		defaultType: 'textfield',
 		items: [
-			{ fieldLabel: 'Code', name: 'code', anchor:'100%', xtype: 'displayfield'},
+			{ fieldLabel: 'Code', name: 'fullcode', anchor:'100%', xtype: 'displayfield'},
 			{ fieldLabel: 'Title', name: 'title', anchor:'100%'},
 			{ fieldLabel: 'Author', name: 'author', anchor:'100%'},
 			{ fieldLabel: 'Publisher', name: 'publisher', anchor:'100%'},
@@ -23,7 +23,7 @@ function handleBookEdit(grid, rowIndex, colIndex) {
 	});
 	var form = formPanel.getForm();
 	form.loadRecord(rec);
-	form.findField('code').setValue(rec.data['cat'] + rec.data['code'] + '-' + rec.data['copy']);
+	form.findField('fullcode').setValue(rec.data['cat'] + rec.data['code'] + '-' + rec.data['copy']);
 
 	var win = new Ext.Window({
 		plain: true,
