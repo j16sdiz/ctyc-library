@@ -82,14 +82,7 @@ Ext.onReady(function() {
 				emptyMsg: "No topics to display",
 				pageSize: 20,
 				store: store
-			}),
-			buttonAlign: 'left',
-			fbar: [{
-				text: 'fbar Left'
-			},
-			'->', {
-				text: 'fbar Right'
-			}]
+			})
 		}]
 	});
 
